@@ -12,6 +12,32 @@ Development of the framework modules -> Approach to all existing HIN models -> R
 
 Version: (0.0.x) -> (0.1.x) -> (0.2.x) -> (0.3.x) -> (0.x.x) -> (1.0.x) -> (1.x.x) -> (2.x.x)
 
+## Development Plan to 1.0.0
+
+### Priority Modules
+
+1. Translator Module
+2. Model Card Module
+3. Data Module
+4. Replace Module
+
+### Future Modules
+
+1. Cloud Module
+2. Save / Load Module (It seems that acting as a transformers save / load module is quite complicated)
+3. Inference Model Module
+4. Deployed Model Module
+
+## Demo and Support of HIN Models Modules
+
+### Priority HIN Models
+
+1. HAN
+2. RGCN
+3. HGT
+4. MAGNN
+5. Will be more
+
 ## Community Help
 
 If you have any suggestions or ideas, please feel free to release an issue. I am very happy to discuss with you.
@@ -54,7 +80,7 @@ The framework requires the user to tag the model with meta information. It is in
 model and generate the meta information. But the framework provides the existing common replace modules and the user
 can directly use them. Besides, the user can provide the extra information to control the replacement.
 
-`model.meta: dict`:
+`model.meta_info: dict`:
 - `replace`: the replace module, type: `eg.Module`
 
 ## Data
