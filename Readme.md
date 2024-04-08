@@ -1,3 +1,24 @@
+# Development of explainable_gnn framework
+
+## Current Version: 0.0.1
+
+## Development Phase: Conceptual Design
+
+## Development Plan
+
+Conceptual Design -> Demo Implementation of the framework pipeline -> Adjustment of the framework pipeline ->
+Development of the framework modules -> Approach to all existing HIN models -> Release of the framework
+-> Continuous Improvement (for unfinished additional features, like cloud) -> Extension to not only HIN models
+
+Version: (0.0.x) -> (0.1.x) -> (0.2.x) -> (0.3.x) -> (0.x.x) -> (1.0.x) -> (1.x.x) -> (2.x.x)
+
+## Community Help
+
+If you have any suggestions or ideas, please feel free to release an issue. I am very happy to discuss with you.
+If anyone is interested in contributing to this project, please feel free to contact me by email to involve in the
+development of this project. Of course, you can also directly fork this project and pull request.
+This project has a long way to go, and hopes to have more people to join in.
+
 # Introduction
 
 People developed a lot of GNN models to solve Heterogeneous Information Network (HIN) tasks. These models capture
@@ -132,7 +153,7 @@ class SimpleGCN(nn.Module):
 	
 	def __init__(self, in_dim, out_dim):
 		super(SimpleGCN, self).__init__()
-		self.linear = nn.Linear(in_dim, out_dim)
+		self.linear = nn.Linear(in_dim, out_dim)  # only for example, not the real GCN model
 
 	def forward(self, x, adj):
 		return self.linear(x)
