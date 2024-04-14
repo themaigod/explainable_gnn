@@ -45,6 +45,16 @@ Version: (0.0.x) -> (0.1.x) -> (0.2.x) -> (0.3.x) -> (0.x.x) -> (1.0.x) -> (1.x.
 4. MAGNN
 5. Will be more
 
+## Current Installation for Development
+
+```angular2html
+python install --editable .
+```
+
+This command will install the package in the development mode. You can directly modify the code in the package.
+Notice that the package is not installed in the site-packages, but in the current directory.
+Another notice is that it may be required to install a higher version of setuptools.
+
 # Introduction
 
 People developed a lot of GNN models to solve Heterogeneous Information Network (HIN) tasks. These models capture
