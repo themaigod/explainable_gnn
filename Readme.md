@@ -6,6 +6,8 @@ If you have any suggestions or ideas, please feel free to release an issue. I am
 If anyone is interested in contributing to this project, please feel free to contact me by email to involve in the
 development of this project. Of course, you can also directly fork this project and pull request.
 This project has a long way to go, and hopes to have more people to join in.
+You can jump to the [Introduction](#Introduction) and [Framework Architecture Design](#Framework-Architecture-Design)
+first to get a brief understanding of the project.
 
 ## Current Version: 0.0.1
 
@@ -54,6 +56,12 @@ python install --editable .
 This command will install the package in the development mode. You can directly modify the code in the package.
 Notice that the package is not installed in the site-packages, but in the current directory.
 Another notice is that it may be required to install a higher version of setuptools.
+
+## Writing Tests for the Modules
+
+The tests are written in the `eg_tests` directory. The tests are written in the `test_*.py` files.
+These files' location is the same as the modules' location. The tests have been not written yet, maybe in `hypothesis`
+style.
 
 # Introduction
 
