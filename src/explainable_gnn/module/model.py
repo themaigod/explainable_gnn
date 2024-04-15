@@ -1,7 +1,15 @@
 import torch.nn as nn
 
 
-class Module(nn.Module):
+class Model:
+    """
+    Base class for all models
+    It is used to quickly identify the models from explainable_gnn
+    """
+    pass
+
+
+class Module(nn.Module, Model):
     def parameters_calculation(self, *args, **kwargs):
         raise NotImplementedError
 
