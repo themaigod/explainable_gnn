@@ -50,7 +50,7 @@ Version: (0.0.x) -> (0.1.x) -> (0.2.x) -> (0.3.x) -> (0.x.x) -> (1.0.x) -> (1.x.
 ## Current Installation for Development
 
 ```angular2html
-python install --editable .
+pip install --editable .
 ```
 
 This command will install the package in the development mode. You can directly modify the code in the package.

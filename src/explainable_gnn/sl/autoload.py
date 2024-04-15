@@ -1,3 +1,3 @@
-import explain_gnn as eg
+import explainable_gnn as eg
 
 

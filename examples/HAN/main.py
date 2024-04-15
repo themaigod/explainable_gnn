@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import explainable_gnn as eg
 
 
 class SemanticAttention(nn.Module):
@@ -24,7 +25,7 @@ class SemanticAttention(nn.Module):
 # Notice that beta is not related to the number of nodes in the graph
 # So we can directly give the final beta to the inference model
 
-class SemanticAttentionTranslation(nn.Module):
+class SemanticAttentionTranslation(eg.Module):
     def __init__(self, beta):
         super(SemanticAttentionTranslation, self).__init__()
 

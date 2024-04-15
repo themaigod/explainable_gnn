@@ -24,5 +24,6 @@ setup(
         'numpy',
         'scipy',
     ],
+    package_dir={'': 'src'},
 )
 
