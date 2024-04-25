@@ -1,4 +1,15 @@
 import torch.nn as nn
+from abc import ABC
+
+
+class BaseModule(ABC):
+    # let nn.Module is a subclass of BaseModule
+    # so that all models in explainable_gnn are also nn.Module
+    # and can be used in PyTorch
+    pass
+
+
+BaseModule.register(nn.Module)
 
 
 class Model:
