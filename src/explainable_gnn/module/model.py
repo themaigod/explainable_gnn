@@ -3,16 +3,17 @@ from abc import ABC
 
 
 class BaseModule(ABC):
-    # let nn.Module is a subclass of BaseModule
-    # so that all models in explainable_gnn are also nn.Module
-    # and can be used in PyTorch
+    """
+    Base class for all acceptable modules
+    torch.nn.Module is registered as a subclass of BaseModule
+    """
     pass
 
 
 BaseModule.register(nn.Module)
 
 
-class Model:
+class Model(BaseModule):
     """
     Base class for all models
     It is used to quickly identify the models from explainable_gnn
