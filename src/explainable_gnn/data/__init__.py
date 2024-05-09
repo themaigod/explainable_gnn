@@ -1,2 +1,2 @@
-from .unify import HINData, DirectedGraphData
-from .standard import StandardHINData, MetaPath, StandardDirectedGraphData
+from .unify import HINData, DirectedGraphData, Data
+from .standard import StandardHINData, MetaPath, StandardDirectedGraphData, StandardData

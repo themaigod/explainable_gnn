@@ -1,7 +1,11 @@
 import explainable_gnn as eg
 
 
-class HINData(eg.Model):
+class Data(eg.Model):
+    pass
+
+
+class HINData(Data):
     """
     HINData Class
     ==============
@@ -148,7 +152,7 @@ class HINData(eg.Model):
         pass
 
 
-class DirectedGraphData(eg.Model):
+class DirectedGraphData(Data):
     """
     DirectedGraphData Class
     =======================

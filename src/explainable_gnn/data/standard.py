@@ -2,10 +2,14 @@ import numpy as np
 import scipy.sparse as sp
 import explainable_gnn as eg
 
-from .unify import HINData, DirectedGraphData
+from .unify import HINData, DirectedGraphData, Data
 
 
-class StandardHINData(HINData):
+class StandardData(Data):
+    pass
+
+
+class StandardHINData(HINData, StandardData):
     """
     StandardHINData Class
     =====================
@@ -377,7 +381,7 @@ class MetaPath(eg.Model):
                                   int), 'meta_path should be list of int (edge type)'
 
 
-class StandardDirectedGraphData(DirectedGraphData):
+class StandardDirectedGraphData(DirectedGraphData, StandardData):
 
     """
     StandardDirectedGraphData Class
