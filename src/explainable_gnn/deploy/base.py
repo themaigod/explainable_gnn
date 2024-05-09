@@ -6,10 +6,10 @@ from .framework import DeployFramework
 from .requirement import DeployRequirement
 
 
-
-
-class DeployModel(eg.Model):
+class DeployModel(eg.Module):
     def __init__(self, model: eg.Module, **kwargs):
+
+        super(DeployModel, self).__init__()
         self.inference_method = None
         self.deploy_method = None
         self.deploy_meta = {}
@@ -49,7 +49,7 @@ class DeployModel(eg.Model):
         """
         return self.deploy_meta.get("requirement", None)
 
-    def deploy_requirement_to(self, requirement):
+    def deploy_requirement_to(self, requirement: DeployRequirement):
         self.deploy_meta["requirement"] = requirement
         if getattr(self, "move_requirement", None) is not None:
             self.move_requirement(requirement)
@@ -102,8 +102,3 @@ class DeployModel(eg.Model):
                 self.remove_device_from_multi_device(device)
             else:
                 _general_remove_device_from_multi_device(self, device)
-
-
-def register_deploy_requirement(requirement: DeployRequirement):
-    registered_deploy_requirement[requirement.requirement_name] = requirement
-    return requirement

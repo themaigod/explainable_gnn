@@ -39,16 +39,113 @@ invalid_str = [
 
 
 class ModelVersion:
+    """
+    ModelVersion Class
+    ==================
+
+    The ``ModelVersion`` class is designed to encapsulate and validate version strings for models, ensuring they conform to specific formatting standards. This class incorporates rigorous checks to validate the format of version strings, adhering to software versioning standards.
+
+    Constructor
+    -----------
+    .. method:: ModelVersion.__init__(version)
+
+       Initializes a new instance of the ``ModelVersion`` class with a specified version string. The version string is validated against a defined format upon initialization.
+
+       :param version: A string representing the version of the model. It must adhere to one of the following formats:
+                       - Purely numeric (e.g., "1", "2.1")
+                       - Dot-separated numbers (e.g., "1.0.0")
+                       - Numbers followed by a pre-release type and optional additional numbers (e.g., "1.0.0-alpha", "1.0.0-beta1", "1.0.0-beta1.2.3")
+       :raises ValueError: If the version string contains invalid characters, does not start with a digit, or does not follow the formatting rules.
+
+    Attributes
+    ----------
+    version : str
+        Stores the validated version string of the model.
+
+    Methods
+    -------
+    .. method:: ModelVersion._valid()
+
+       Validates the format of the version string. This private method checks the string against a series of format rules to ensure compliance with standard versioning practices.
+
+       :return: True if the version string is valid, False otherwise.
+
+    .. method:: ModelVersion.compare(other)
+
+         Compares this version with another version to determine their relative order based on the numeric components of the version strings.
+
+        :param other: Another ``ModelVersion`` instance to compare against.
+        :return: 0 if the versions are equal, 1 if this version is greater, -1 if this version is less.
+
+    Magic Methods
+    -------------
+    .. method:: ModelVersion.__str__()
+
+       Returns the version string.
+
+    .. method:: ModelVersion.__repr__()
+
+       Returns a string representation of the version, suitable for debugging.
+
+    .. method:: ModelVersion.__eq__(other)
+
+       Compares this ``ModelVersion`` instance with another to check for equality based on the entire version string.
+
+       :param other: Another ``ModelVersion`` instance.
+       :return: True if the entire version strings are identical, False otherwise.
+
+    .. method:: ModelVersion.__hash__()
+
+       Returns a hash based on the version string.
+
+    Version Comparison Methods
+    --------------------------
+    These comparison methods only consider the numeric parts of the version strings, ignoring any pre-release or build metadata.
+
+    .. method:: ModelVersion.__lt__(other)
+
+       Checks if this version is less than another version based on their numeric components.
+
+    .. method:: ModelVersion.__le__(other)
+
+       Checks if this version is less than or equal to another version based on their numeric components.
+
+    .. method:: ModelVersion.__ne__(other)
+
+       Checks if this version is not equal to another based on their numeric components.
+
+    .. method:: ModelVersion.__gt__(other)
+
+       Checks if this version is greater than another version based on their numeric components.
+
+    .. method:: ModelVersion.__ge__(other)
+
+       Checks if this version is greater than or equal to another version based on their numeric components.
+
+    Examples
+    --------
+    Creating and using a ``ModelVersion``:
+
+    .. code-block:: python
+
+        try:
+            version = ModelVersion("1.0.0-beta1")
+            print(version)  # Outputs: "1.0.0-beta1"
+        except ValueError as e:
+            print(e)  # E.g., "Invalid version string"
+
+        version1 = ModelVersion("1.0.0-alpha")
+        version2 = ModelVersion("1.0.0-beta")
+        print(version1 < version2)  # Outputs: False, comparisons ignore non-numeric parts
+
+    Notes
+    -----
+    - The ``ModelVersion`` class plays a crucial role in ensuring that version strings are correctly formatted and validated, particularly in environments where software versioning impacts compatibility and deployment decisions.
+    - The distinct behaviors of the equality and comparison methods need careful consideration when used to ensure that comparisons align with the intended use cases of versioning in a software environment.
+
+    """
+
     def __init__(self, version):
-        """
-        :param version: str
-                        valid version string:
-                            {number}
-                            {number}.{number}.{number}
-                            {number}.{number}.{number}-{type}
-                            {number}.{number}.{number}-{type}{number}
-                            {number}.{number}.{number}-{type}{number}.{number}.{number}
-        """
         self.version = version
         self._valid()
 
@@ -119,3 +216,32 @@ class ModelVersion:
 
     def __get__(self, instance, owner):
         return self.version
+
+    def compare(self, other):
+        if self.version.split("-")[0] == other.version.split("-")[0]:
+            return 0
+        self_version = list(map(int, self.version.split("-")[0].split(".")))
+        other_version = list(map(int, other.version.split("-")[0].split(".")))
+        for i in range(min(len(self_version), len(other_version))):
+            if self_version[i] > other_version[i]:
+                return 1
+            elif self_version[i] < other_version[i]:
+                return -1
+        if len(self_version) > len(other_version):
+            return 1
+        return -1
+
+    def __lt__(self, other):
+        return self.compare(other) == -1
+
+    def __le__(self, other):
+        return self.compare(other) != 1
+
+    def __ne__(self, other):
+        return self.compare(other) != 0
+
+    def __gt__(self, other):
+        return self.compare(other) == 1
+
+    def __ge__(self, other):
+        return self.compare(other) != -1

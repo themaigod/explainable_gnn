@@ -1,11 +1,19 @@
 explainable_gnn.module.model
 ====================
-.. automodule:: unexplainable_gnn.module.model
+.. automodule:: explainable_gnn.module.model
 
-.. contents:: torch.nn
+.. contents:: explainable_gnn.module.model
     :depth: 2
     :local:
     :backlinks: top
 
-.. currentmodule:: unexplainable_gnn.module.model
+.. currentmodule:: explainable_gnn.module.model
+
+Base
+----
+.. autosummary::
+    :toctree: _autosummary
+
+    BaseGNN
+    BaseGNNExplainer
 
