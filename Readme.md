@@ -73,23 +73,25 @@ In this repository, we provide a framework translating the models to directly no
 inference when the model is deployed. Based on the analysis of current models, we provide a simple and efficient method
 to construct the node representations for regular HINs.
 
+This framework is called `explainable_gnn` (`eg` for short). 
+
 # Framework Architecture Design
 
 ## Overview
 
 1. Tagging the model with meta information (by the user)
 2. Replacing the model with the replace module (by the framework Translator Module)
-	1. Initializing the replace module with the meta information
-	2. Calculating the parameters of the replace module
-	3. Replacing the model with the replace module
+   1. Initializing the replace module with the meta information
+   2. Calculating the parameters of the replace module
+   3. Replacing the model with the replace module
 3. Visualizing the final replace structure (by the framework Translator Module)
 4. Visualizing / Analyzing the node representation dependencies (by the framework Translator Module)
 5. Approximating the model to further accelerate the inference (by the framework Translator Module)
 6. Managing the model
-	1. Model Type Transformation (Model -> Inference Model -> Deployed Model)
-	2. Model Saving and Loading (by the framework Save / Load Module)
-	3. Managing the Nodel by Model Name and Model Card (by the framework Model Info Module)
-	4. Cloud Management (List, Delete, Download, Upload by the framework Cloud Module)
+   1. Model Type Transformation (Model -> Inference Model -> Deployed Model)
+   2. Model Saving and Loading (by the framework Save / Load Module)
+   3. Managing the Nodel by Model Name and Model Card (by the framework Model Info Module)
+   4. Cloud Management (List, Delete, Download, Upload by the framework Cloud Module)
 
 ## Meta Information
 
@@ -168,8 +170,6 @@ We also provide easy private cloud initialization. The user can easily set up th
 
 ## Installation
 
-[//]: # (github.com/themaigod/explainable_gnn)
-
 ```angular2html
 pip install git+https:github.com/themaigod/explainable_gnn.git
 ```
@@ -187,7 +187,7 @@ import torch
 class SimpleGCN(nn.Module):
     # add meta information
     meta_info = {
-        'replace': eg.GCN("HAN"),
+        'replace_module': eg.GCN("HAN"),
         'required': "train",
         'train_info': {
             'original_params': torch.load("path/to/params"),
@@ -274,3 +274,37 @@ eg.cloud.delete("name", cloud_path="path/to/cloud")
 eg.cloud.download("name", cloud_path="path/to/cloud", local_path="path/to/local")
 eg.cloud.upload("name", cloud_path="path/to/cloud", local_path="path/to/local")
 ```
+
+We also provide other original implementation ways instead of meta_info. Particularly, you can design your own 
+replace module, and set it as the original model attribute `replace_module`. Please note that the original model 
+should be inherited from `eg.Module`.
+
+```python
+import torch.nn as nn
+import explainable_gnn as eg
+
+
+class OriginalModel(nn):
+	pass
+
+
+class OriginalReplaceModule(eg.Module):
+	replace_module = ReplaceModule() # your replace module
+	pass
+```
+
+It is also allowed to use the `eg.Module` to design the model. The `eg.Module` is inherited from `torch.nn.Module` and
+has the same interface as `torch.nn.Module`.
+
+```python
+import explainable_gnn as eg
+
+
+class OriginalModel(eg.Module):
+	pass
+
+	# override the required methods as the description in the `eg.Module`
+```
+
+Here, the priority is the `replace_module` attribute in the eg.Module. Then, the meta_info in the model. Finally, the
+model itself.
