@@ -205,6 +205,14 @@ class Module(nn.Module, Model):
                 # Custom deployment preparation logic
                 pass
 
+            def approximate(self):
+                # Custom approximation logic
+                pass
+
+            def replace(self):
+                # Custom model replacement logic
+                pass
+
     Notes
     -----
     - The ``Module`` class is crucial for developers working within the Explainable GNN framework, ensuring that all models conform to the framework's operational standards and practices.
@@ -216,7 +224,16 @@ class Module(nn.Module, Model):
         super(Module, self).__init__()
         self.save_regular = False
 
-    def parameters_calculation(self, *args, **kwargs):
+        if kwargs.get("replace_module", None) is not None:
+            self.replace_module = kwargs.get("replace_module")
+
+    def replace(self, *args, **kwargs):
+        """
+        Replace the model
+        """
+        raise NotImplementedError
+
+    def parameters_calculation(self):
         """
         It is required to translate process
         When the new module tries to replace the old module, the parameters may require to be recalculated
@@ -288,6 +305,7 @@ class TreeNode:
        Returns a detailed string representation of the node for debugging purposes.
 
     """
+
     def __init__(self, value, parent=None):
         self.value = value
         self.parent = parent
@@ -363,6 +381,7 @@ class tree:
         tree.display()
 
     """
+
     def __init__(self, edge_list=None):
         self.root = None
         if edge_list is not None:
