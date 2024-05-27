@@ -4,6 +4,7 @@ import explainable_gnn as eg
 
 
 class SemanticAttention(nn.Module):
+
     def __init__(self, in_size, hidden_size=128):
         super(SemanticAttention, self).__init__()
 

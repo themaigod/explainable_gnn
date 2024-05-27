@@ -2,7 +2,7 @@ import explainable_gnn as eg
 from .general import _general_inference_method
 
 
-class InferenceModel(eg.Module):
+class InferenceModel(eg.Model):
     def __init__(self, model: eg.Module, **kwargs):
         super(InferenceModel, self).__init__()
         self.inference_method = None

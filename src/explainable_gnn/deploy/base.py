@@ -6,7 +6,7 @@ from .framework import DeployFramework
 from .requirement import DeployRequirement
 
 
-class DeployModel(eg.Module):
+class DeployModel(eg.Model):
     def __init__(self, model: eg.Module, **kwargs):
 
         super(DeployModel, self).__init__()
