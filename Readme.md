@@ -9,6 +9,12 @@ This project has a long way to go, and hopes to have more people to join in.
 You can jump to the [Introduction](#Introduction) and [Framework Architecture Design](#Framework-Architecture-Design)
 first to get a brief understanding of the project.
 
+## Git Branches
+
+- `main`: the main branch, if we think the design has been stable, we will merge the development branch to the main
+- `dev`: the development branch, we will update the branch to the newest version
+         if you want to follow, please follow this branch
+
 ## Current Version: 0.0.1
 
 ## Development Phase: Conceptual Design
@@ -73,7 +79,8 @@ In this repository, we provide a framework translating the models to directly no
 inference when the model is deployed. Based on the analysis of current models, we provide a simple and efficient method
 to construct the node representations for regular HINs.
 
-This framework is called `explainable_gnn` (`eg` for short). 
+This framework is called `explainable_gnn` (`eg` for short), currently developed by the author (JIANG Maiqi). If more
+people are interested in this project, we can construct a core team to more officially develop this project.
 
 # Framework Architecture Design
 
@@ -165,6 +172,12 @@ When save or load the model, the cloud can be used by setting the `cloud` and `c
 
 We also provide easy private cloud initialization. The user can easily set up the private cloud by
 `eg.cloud.init(port, password)`.
+
+## Explain Framework
+
+Here we decide to use different frameworks to explain graph dependencies and feature dependencies (Linear Layer).
+You can choose the framework, or use the default selection.
+
 
 # How to use
 
@@ -275,8 +288,8 @@ eg.cloud.download("name", cloud_path="path/to/cloud", local_path="path/to/local"
 eg.cloud.upload("name", cloud_path="path/to/cloud", local_path="path/to/local")
 ```
 
-We also provide other original implementation ways instead of meta_info. Particularly, you can design your own 
-replace module, and set it as the original model attribute `replace_module`. Please note that the original model 
+We also provide other original implementation ways instead of meta_info. Particularly, you can design your own
+replace module, and set it as the original model attribute `replace_module`. Please note that the original model
 should be inherited from `eg.Module`.
 
 ```python
